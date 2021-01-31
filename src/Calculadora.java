@@ -11,15 +11,15 @@
 
 public class Calculadora implements  CalculadoraGeneral{
 
-    private Stack<Double> stack;
+    private Stack<Integer> stack;
     private String nums;
     private String ops;
 
     public Calculadora(){
-        //Post: Crear un vector que almacene los resultados de las operaciones.
-        //Crear un string con los digitos decimales.
+        //Post: Crear un vector que almacene los resultados de las operaciones. Crear strings
+        //      para determinar si el string es operador u operadno.
 
-        stack = new StackVector<Double>();
+        stack = new StackVector<Integer>();
         nums = "0123456789";
         ops = "+-*/";
     }
@@ -31,9 +31,12 @@ public class Calculadora implements  CalculadoraGeneral{
 
         try {
             for(int i = 0; i<texto.length(); i++){
+                //Obtener cada caracter del string.
                 char op = texto.charAt(i);
+
+                //Determinar si es un operador, operando o un termino no valido.
                 if(nums.contains(Character.toString(op))){
-                    stack.push((double) Character.getNumericValue(op));
+                    stack.push(Character.getNumericValue(op));
                 }
                 else if(ops.contains(Character.toString(op))){
                     postFixEvalution(op);
@@ -61,13 +64,18 @@ public class Calculadora implements  CalculadoraGeneral{
 
     }
 
+    /**Metodo que permite realizar las operaciones determinadas por los operadores
+     * de la expresion postfix.*/
     private boolean postFixEvalution(char operator) throws ArithmeticException{
         //Pre: Validar que el stack no este vacio y que los operandos sean numeros.
         //Post: Realizar la operacion indicada
         try{
             if(!stack.empty()){
-                Double op1 = stack.pop();
-                Double op2 = stack.pop();
+                //Se obtienen los dos operandos mas recientes del stack.
+                Integer op1 = stack.pop();
+                Integer op2 = stack.pop();
+
+                //Se determina la operacion por hacer.
                 if(op1 != null && op2 != null){
                     switch (operator){
                         case '+':
@@ -97,8 +105,6 @@ public class Calculadora implements  CalculadoraGeneral{
             String ex = "Error: Division por 0";
             throw new ArithmeticException(ex);
         }
-
-
     }
 
 }
