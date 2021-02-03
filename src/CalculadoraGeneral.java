@@ -11,5 +11,5 @@
 public interface CalculadoraGeneral {
 
     /**Metodo que permite evaluar expresiones en postfix.*/
-    public String Calculo(String texto) throws Exception;
+    public String Calculo(String expresion) throws Exception;
 }

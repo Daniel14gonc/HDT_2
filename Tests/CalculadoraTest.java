@@ -8,8 +8,8 @@ public class CalculadoraTest {
     public void calculo() {
         Calculadora calculadora = new Calculadora();
         //String exp = "123+*8-";
-        String exp = "20/";
+        String exp = "5 2 5 2 7 * * * *";
         String res = calculadora.Calculo(exp);
-        assertEquals("Fallo en calculo", "-3.0", res);
+        assertEquals("Fallo en calculo", "700", res);
     }
 }

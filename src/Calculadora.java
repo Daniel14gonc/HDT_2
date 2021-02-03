@@ -18,21 +18,19 @@ public class Calculadora implements  CalculadoraGeneral{
     public Calculadora(){
         //Post: Crear un vector que almacene los resultados de las operaciones. Crear strings
         //      para determinar si el string es operador u operadno.
-
-        stack = new StackVector<Integer>();
         nums = "0123456789";
         ops = "+-*/";
     }
 
     @Override
-    public String Calculo(String texto) throws ArithmeticException {
+    public String Calculo(String expresion) throws ArithmeticException {
         //Pre: Validar que se haya ingresado un numero.
         //Post: Determinar si se debe almacenar el numero en el vector o se debe hacer una operacion.
-
+        stack = new StackVector<Integer>();
         try {
-            for(int i = 0; i<texto.length(); i++){
+            for(int i = 0; i<expresion.length(); i++){
                 //Obtener cada caracter del string.
-                char op = texto.charAt(i);
+                char op = expresion.charAt(i);
 
                 //Determinar si es un operador, operando o un termino no valido.
                 if(nums.contains(Character.toString(op))){
@@ -72,26 +70,25 @@ public class Calculadora implements  CalculadoraGeneral{
         try{
             if(!stack.empty()){
                 //Se obtienen los dos operandos mas recientes del stack.
-                Integer op1 = stack.pop();
                 Integer op2 = stack.pop();
+                Integer op1 = stack.pop();
 
                 //Se determina la operacion por hacer.
                 if(op1 != null && op2 != null){
                     switch (operator){
                         case '+':
-                            stack.push(op2 + op1);
+                            stack.push(op1 + op2);
                             break;
                         case '-':
-                            stack.push(op2 - op1);
+                            stack.push(op1 - op2);
                             break;
                         case '*':
-                            stack.push(op2 * op1);
+                            stack.push(op1 * op2);
                             break;
                         case '/':
-                            stack.push(op2 / op1);
+                            stack.push(op1 / op2);
                             break;
                     }
-
                     return true;
                 }
                 else
